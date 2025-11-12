@@ -8,7 +8,7 @@ type Props = {
   coords: Coords
 }
 
-export default function HourlyForecast({ coords }: Props) {
+export default function HourlyForecast({ coords }: Readonly<Props>) {
   const { data } = useSuspenseQuery({
     queryKey: ["weather", coords],
     queryFn: () => getWeather({ lat: coords.lat, lon: coords.lon }),

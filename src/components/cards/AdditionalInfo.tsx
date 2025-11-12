@@ -14,7 +14,7 @@ type Props = {
   coords: Coords
 }
 
-export default function AdditionalInfo({ coords }: Props) {
+export default function AdditionalInfo({ coords }: Readonly<Props>) {
   const { data } = useSuspenseQuery({
     queryKey: ["weather", coords],
     queryFn: () => getWeather({ lat: coords.lat, lon: coords.lon }),
@@ -39,7 +39,7 @@ export default function AdditionalInfo({ coords }: Props) {
   )
 }
 
-function FormatComponent({ value, number }: { value: string; number: number }) {
+function FormatComponent({ value, number }: Readonly<{ value: string; number: number }>) {
   if (value === "sunrise" || value === "sunset")
     return new Date(number * 1000).toLocaleTimeString(undefined, {
       hour: "numeric",

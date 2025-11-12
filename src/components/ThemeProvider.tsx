@@ -19,7 +19,7 @@ type ThemeContextType = {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
-export default function ThemeProvider({ children }: Props) {
+export default function ThemeProvider({ children }: Readonly<Props>) {
   const [theme, setTheme] = useState<Theme>("dark")
 
   const toggleTheme = () => {

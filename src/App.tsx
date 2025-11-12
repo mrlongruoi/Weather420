@@ -21,7 +21,7 @@ import LightDarkToggle from "./components/LightDarkToggle"
 
 function App() {
   const [coordinates, setCoords] = useState<Coords>({ lat: 50, lon: 45 })
-  const [location, setLocation] = useState("Tokyo")
+  const [location, setLocation] = useState("Hanoi")
   const [mapType, setMapType] = useState("clouds_new")
   const [isSidePanelOpen, setIsSidePanelOpen] = useState(false)
 
@@ -44,18 +44,24 @@ function App() {
     <>
       <MobileHeader setIsSidePanelOpen={setIsSidePanelOpen} />
       <div className="flex flex-col gap-8 pt-4 p-8 xs:pt-8 lg:w-[calc(100dvw-var(--sidebar-width))] 2xl:h-screen 2xl:min-h-[1120px]">
-        <div className="flex flex-col gap-4 xs:flex-row xs:gap-8">
-          <div className="flex flex-col md:flex-row gap-2 md:gap-4">
-            <h1 className="text-2xl font-semibold">Location: </h1>
-            <LocationDropdown location={location} setLocation={setLocation} />
+        <div className="relative z-1002 flex flex-col gap-4 xs:flex-row xs:items-center xs:justify-between xs:gap-8">
+          {/* --- Left group: Location + Map Type --- */}
+          <div className="flex flex-col md:flex-row gap-4 md:gap-6">
+            {/* Location selector */}
+            <div className="flex items-center gap-2">
+              <h1 className="text-2xl font-semibold whitespace-nowrap">Location:</h1>
+              <LocationDropdown location={location} setLocation={setLocation} />
+            </div>
+
+            {/* Map type selector */}
+            <div className="flex items-center gap-2">
+              <h1 className="text-2xl font-semibold whitespace-nowrap">Map Type:</h1>
+              <MapTypeDropdown mapType={mapType} setMapType={setMapType} />
+            </div>
           </div>
-          <div className="flex flex-col md:flex-row gap-2 md:gap-4">
-            <h1 className="text-2xl font-semibold whitespace-nowrap">
-              Map Type:{" "}
-            </h1>
-            <MapTypeDropdown mapType={mapType} setMapType={setMapType} />
-          </div>
-          <div className="ml-auto flex gap-4 items-center">
+
+          {/* --- Right group: theme toggle + side panel --- */}
+          <div className="flex items-center gap-4 ml-auto">
             <div className="hidden xs:block">
               <LightDarkToggle />
             </div>
@@ -67,6 +73,7 @@ function App() {
             </button>
           </div>
         </div>
+
         <div className="grid grid-cols-1 2xl:flex-1 2xl:min-h-0 md:grid-cols-2 2xl:grid-cols-4 2xl:grid-rows-4 gap-4">
           <div className="relative h-120 2xl:h-auto col-span-1 md:col-span-2 2xl:col-span-4 2xl:row-span-2 order-1">
             <Map coords={coords} onMapClick={onMapClick} mapType={mapType} />

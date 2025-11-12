@@ -16,7 +16,7 @@ type Props = {
   setIsSidePanelOpen: Dispatch<SetStateAction<boolean>>
 }
 
-export default function SidePanel(props: Props) {
+export default function SidePanel(props: Readonly<Props>) {
   const { isSidePanelOpen, setIsSidePanelOpen } = props
   return (
     <div
@@ -35,7 +35,7 @@ export default function SidePanel(props: Props) {
   )
 }
 
-function AirPollution({ coords }: Props) {
+function AirPollution({ coords }: Readonly<Props>) {
   const { data } = useSuspenseQuery({
     queryKey: ["pollution", coords],
     queryFn: () => getAirPollution(coords),
@@ -125,6 +125,7 @@ function AirPollution({ coords }: Props) {
             <div className="flex justify-between">
               {Object.keys(pollutant).map((quality) => (
                 <span
+                  key={quality}
                   className={clsx(
                     "px-2 py-1 rounded-md text-xs font-medium",
                     quality === currentLevel

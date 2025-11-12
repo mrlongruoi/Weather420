@@ -5,7 +5,7 @@ type Props = {
   className?: string
 }
 
-export default function WeatherIcon({ src, className }: Props) {
+export default function WeatherIcon({ src, className }: Readonly<Props>) {
   return (
     <img
       className={clsx("size-8", className)}

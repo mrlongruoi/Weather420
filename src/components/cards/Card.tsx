@@ -13,7 +13,7 @@ export default function Card({
   title,
   className,
   childrenClassName,
-}: Props) {
+}: Readonly<Props>) {
   return (
     <div
       className={clsx(

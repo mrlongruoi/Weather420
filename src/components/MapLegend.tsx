@@ -2,7 +2,7 @@ type Props = {
   mapType: string
 }
 
-export default function MapLegend({ mapType }: Props) {
+export default function MapLegend({ mapType }: Readonly<Props>) {
   const data = mapTypeData[mapType]
 
   const maxValue = data.stops[data.stops.length - 1].value

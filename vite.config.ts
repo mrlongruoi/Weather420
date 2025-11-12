@@ -2,7 +2,7 @@ import { defineConfig } from "vite"
 import react from "@vitejs/plugin-react"
 import tailwindcss from "@tailwindcss/vite"
 import svgr from "vite-plugin-svgr"
-import path from "path"
+import path from "node:path"
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -10,6 +10,16 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+    },
+  },
+  build: {
+    chunkSizeWarningLimit: 1500, // tăng giới hạn warning
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ["react", "react-dom", "leaflet"], // tách vendor chunk
+        },
+      },
     },
   },
 })
